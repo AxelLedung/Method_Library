@@ -1,0 +1,25 @@
+# .NET Core
+bin/
+obj/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# appsettings
+appsettings.Development.json
+
+# NuGet
+*.nupkg
+packages/
+
+# Temporary files
+*.tmp
