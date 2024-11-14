@@ -37,5 +37,5 @@ For example to extract from JSON in a specific way or a method for creating erro
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/interactive-code-platform.git
-cd interactive-code-platform
+git clone https://github.com/AxelLedung/Method_Library.git
+cd Method_Library
