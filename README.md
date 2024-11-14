@@ -1,6 +1,8 @@
-# Interactive Code Demonstration Platform
+# Method Library
 
-This project is an interactive web-based platform designed to allow users to experiment with custom methods and classes across different programming languages. Built with `.NET Core`, it serves as an educational tool where users can learn by writing and running code in real-time.
+This project is an interactive web-based platform designed to allow users to store their most useful methods and classes across different programming languages. 
+Built with `.NET Core`, it serves as an helpful tool where the user can find already developed methods and classes made for generic purposes. 
+For example to extract from JSON in a specific way or a method for creating error log files at a preferred directory. 
 
 ## Project Structure
 
@@ -13,12 +15,8 @@ This project is an interactive web-based platform designed to allow users to exp
 
 ## Features
 
-1. **Interactive Code Editor**: Users can write code in .NET, Java, and Python and run it to see results instantly.
-2. **Real-Time Execution Feedback**: Using SignalR for real-time WebSocket communication, code output is returned directly to the browser.
-3. **User Authentication & Profiles**: Users can register, log in, and save code snippets to their profiles.
-4. **Sample Code Library**: A library of sample methods and classes for each language is available for users to explore.
-5. **Containerized Code Execution**: Each language environment runs in a Docker container, ensuring isolated and secure code execution.
-6. **Database for Code Snippets**: Users can save, retrieve, and share code snippets they create.
+1. **Sample Code Library**: A library of sample methods and classes for each language is available for users to explore.
+2. **Database for Code Snippets**: Users can save and retrieve code snippets they create.
 
 ## Technology Stack
 
