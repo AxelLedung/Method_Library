@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Method_Library.Data;
 using Method_Library.Models;
+using Method_Library.ViewModels;
 
 namespace Method_Library.Controllers
 {
@@ -34,6 +35,7 @@ namespace Method_Library.Controllers
             }
 
             var categories = await _context.Categories
+                .Include(c => c.Languages)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (categories == null)
             {
@@ -46,7 +48,16 @@ namespace Method_Library.Controllers
         // GET: Categories/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new CategoryViewModel
+            {
+                Languages = _context.Languages.Select(l => new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = l.Name
+                }).ToList()
+            };
+
+            return View(viewModel);
         }
 
         // POST: Categories/Create
@@ -54,15 +65,32 @@ namespace Method_Library.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Categories categories)
+        public IActionResult Create(CategoryViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(categories);
-                await _context.SaveChangesAsync();
+                // Create a new Category with the LanguageId
+
+                var category = new Categories
+                {
+                    Name = viewModel.Name,
+                    LanguageId = viewModel.SelectedLanguageId
+                };
+
+                _context.Categories.Add(category);
+                _context.SaveChanges(); // This inserts the category and associates it with the specified LanguageId
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(categories);
+
+            // Repopulate the dropdown if validation fails
+            viewModel.Languages = _context.Languages.Select(l => new SelectListItem
+            {
+                Value = l.Id.ToString(),
+                Text = l.Name
+            }).ToList();
+
+            return View(viewModel);
         }
 
         // GET: Categories/Edit/5

@@ -29,11 +29,16 @@ namespace Method_Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LanguageId");
 
                     b.ToTable("Categories");
                 });
@@ -74,6 +79,22 @@ namespace Method_Library.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Snippets");
+                });
+
+            modelBuilder.Entity("Method_Library.Models.Categories", b =>
+                {
+                    b.HasOne("Method_Library.Models.Languages", "Languages")
+                        .WithMany("Categories")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Languages");
+                });
+
+            modelBuilder.Entity("Method_Library.Models.Languages", b =>
+                {
+                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

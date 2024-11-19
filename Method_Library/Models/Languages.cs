@@ -10,5 +10,7 @@ namespace Method_Library.Models
         [Required]
         public string Name {  get; set; }
 
+        public ICollection<Categories> Categories { get; set; } = new List<Categories>();
+
     }
 }

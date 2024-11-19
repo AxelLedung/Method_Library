@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Method_Library.Models
 {
@@ -9,5 +10,11 @@ namespace Method_Library.Models
 
         [Required]
         public string Name { get; set; }
+
+        [Required]
+        public int LanguageId { get; set; }
+
+        [ForeignKey("LanguageId")]
+        public Languages Languages { get; set; }
     }
 }
