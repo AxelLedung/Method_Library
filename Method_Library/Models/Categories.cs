@@ -16,5 +16,7 @@ namespace Method_Library.Models
 
         [ForeignKey("LanguageId")]
         public Languages Languages { get; set; }
+
+        public ICollection<Snippets> Snippets { get; set; } = new List<Snippets>();
     }
 }

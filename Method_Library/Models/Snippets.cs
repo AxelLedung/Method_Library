@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Method_Library.Models
 {
@@ -12,5 +13,11 @@ namespace Method_Library.Models
 
         [Required]
         public string Code { get; set; }
+
+        [Required]
+        public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public Categories Categories { get; set; }
     }
 }

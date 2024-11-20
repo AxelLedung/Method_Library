@@ -68,6 +68,9 @@ namespace Method_Library.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -77,6 +80,8 @@ namespace Method_Library.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Snippets");
                 });
@@ -90,6 +95,22 @@ namespace Method_Library.Migrations
                         .IsRequired();
 
                     b.Navigation("Languages");
+                });
+
+            modelBuilder.Entity("Method_Library.Models.Snippets", b =>
+                {
+                    b.HasOne("Method_Library.Models.Categories", "Categories")
+                        .WithMany("Snippets")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Categories");
+                });
+
+            modelBuilder.Entity("Method_Library.Models.Categories", b =>
+                {
+                    b.Navigation("Snippets");
                 });
 
             modelBuilder.Entity("Method_Library.Models.Languages", b =>

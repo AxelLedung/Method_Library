@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Method_Library.Data;
 using Method_Library.Models;
+using Method_Library.ViewModels;
 
 namespace Method_Library.Controllers
 {
@@ -46,7 +47,15 @@ namespace Method_Library.Controllers
         // GET: Snippets/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new SnippetsViewModel
+            {
+                Categories = _context.Categories.Select(l => new SelectListItem
+                {
+                    Value = l.Id.ToString(),
+                    Text = l.Name
+                }).ToList()
+            };
+            return View(viewModel);
         }
 
         // POST: Snippets/Create
@@ -54,15 +63,28 @@ namespace Method_Library.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Code")] Snippets snippets)
+        public IActionResult Create(SnippetsViewModel viewModel)
         {
             if (ModelState.IsValid)
             {
+                var snippets = new Snippets
+                {
+                    Name = viewModel.Name,
+                    Code = viewModel.Code,
+                    CategoryId = viewModel.SelectedCategoryId
+                };
                 _context.Add(snippets);
-                await _context.SaveChangesAsync();
+                _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(snippets);
+
+            viewModel.Categories = _context.Languages.Select(l => new SelectListItem
+            {
+                Value = l.Id.ToString(),
+                Text = l.Name
+            }).ToList();
+
+            return View(viewModel);
         }
 
         // GET: Snippets/Edit/5
