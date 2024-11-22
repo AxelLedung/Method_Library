@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,16 +24,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @await Component.InvokeAsync("LanguageMenu")
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Languages" asp-action="Index">Manage Languages</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Manage Categories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Snippets" asp-action="Index">Manage Snippets</a>
-                        </li>
+                        @await Component.InvokeAsync("LanguageMainMenu")
                     </ul>
                 </div>
             </div>
@@ -41,7 +37,31 @@
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            @{
+                                if (currentAction == "Display") {
+
+                                    if (currentController == "Languages")
+                                    {
+                                        @await Component.InvokeAsync("LanguageSideMenu")
+                                        ;
+                                    }
+                                    else if (currentController == "Categories")
+                                    {
+                                        var currentLanguageId = (int?)ViewData["LanguageId"];
+                                        ;
+                                        @await Component.InvokeAsync("CategorySideMenu", new { languageId = currentLanguageId })
+                                        ;
+                                    }
+                                    else if (currentController == "Snippets")
+                                    {
+
+                                        var currentCategoryId = (int?)ViewData["CategoryId"];
+
+                                        @await Component.InvokeAsync("SnippetSideMenu", new { categoryId = currentCategoryId })
+                                        ;
+                                    }
+                                }
+                            }
                         </li>
                         
                     </ul>

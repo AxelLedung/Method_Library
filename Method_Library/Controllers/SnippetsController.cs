@@ -43,6 +43,28 @@ namespace Method_Library.Controllers
 
             return View(snippets);
         }
+        public async Task<IActionResult> Display(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var snippets = await _context.Snippets
+                .Include(c => c.Categories)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            var currentCategory = _context.Categories.FirstOrDefault(c => c.Id == snippets.CategoryId);
+            ViewData["CurrentCategory"] = currentCategory;
+
+            if (snippets == null)
+            {
+                return NotFound();
+            }
+
+            return View(snippets);
+        }
+
 
         // GET: Snippets/Create
         public IActionResult Create()

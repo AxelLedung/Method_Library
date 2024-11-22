@@ -3,11 +3,11 @@ using Method_Library.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
-public class LanguageMenuViewComponent : ViewComponent
+public class LanguageMainMenuViewComponent : ViewComponent
 {
     private readonly AppDbContext _context;
 
-    public LanguageMenuViewComponent(AppDbContext context)
+    public LanguageMainMenuViewComponent(AppDbContext context)
     {
         _context = context;
     }

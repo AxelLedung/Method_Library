@@ -42,6 +42,26 @@ namespace Method_Library.Controllers
 
             return View(languages);
         }
+        public async Task<IActionResult> Display(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var languages = await _context.Languages
+                .Include(c => c.Categories)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+
+
+            if (languages == null)
+            {
+                return NotFound();
+            }
+
+            return View(languages);
+        }
 
         // GET: Languages/Create
         public IActionResult Create()

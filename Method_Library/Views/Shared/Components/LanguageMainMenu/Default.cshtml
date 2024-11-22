@@ -3,7 +3,7 @@
 @foreach (var language in Model)
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Languages" asp-action="Index" asp-route-id="@language.Name">
+        <a class="nav-link text-dark" asp-controller="Languages" asp-action="Display" asp-route-id="@language.Id">
             @language.Name
         </a>
     </li>

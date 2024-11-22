@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Method_Library.Models.Categories>
+
+@foreach (var categories in Model)
+{
+    <a class="nav-link active" aria-current="page" asp-action="Display" asp-route-id="@categories.Id">@categories.Name</a>
+}

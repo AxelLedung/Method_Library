@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Method_Library.Models.Snippets>
+
+@foreach (var snippets in Model)
+{
+    <a class="nav-link active" aria-current="page" asp-action="Display" asp-route-id="@snippets.Id">@snippets.Name</a>
+}
