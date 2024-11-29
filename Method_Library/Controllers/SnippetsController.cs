@@ -52,6 +52,7 @@ namespace Method_Library.Controllers
 
             var snippets = await _context.Snippets
                 .Include(c => c.Categories)
+                .Include(c => c.Categories.Languages)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             var currentCategory = _context.Categories.FirstOrDefault(c => c.Id == snippets.CategoryId);

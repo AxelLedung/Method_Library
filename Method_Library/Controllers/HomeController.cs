@@ -1,3 +1,4 @@
+using Method_Library.Data;
 using Method_Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,54 +8,22 @@ namespace Method_Library.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(AppDbContext context, ILogger<HomeController> logger)
         {
+            _context = context;
             _logger = logger;
+
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
+            var languages = _context.Languages
+            .ToList();
 
-        public IActionResult CSharp()
-        {
-            return View();
+            return View(languages);
         }
-        public IActionResult CPlusPlus()
-        {
-            return View();
-        }
-        public IActionResult C()
-        {
-            return View();
-        }
-        public IActionResult Python()
-        {
-            return View();
-        }
-        public IActionResult Java()
-        {
-            return View();
-        }
-        public IActionResult Javascript()
-        {
-            return View();
-        }
-        public IActionResult HTML()
-        {
-            return View();
-        }
-        public IActionResult CSS()
-        {
-            return View();
-        }
-        public IActionResult SQL()
-        {
-            return View();
-        }
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

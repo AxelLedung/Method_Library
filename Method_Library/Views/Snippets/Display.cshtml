@@ -7,7 +7,7 @@
 
 
 <div>
-    <span><a asp-controller="Languages" asp-action="Display" asp-route-id="">Language</a>/</span>
+    <span><a asp-controller="Languages" asp-action="Display" asp-route-id="@Model.Categories.LanguageId">@Model.Categories.Languages.Name</a>/</span>
     <span><a asp-controller="Categories" asp-action="Display" asp-route-id="@Model.CategoryId">@Model.Categories.Name</a>/</span>
     <span>@Model.Name</span>
     <p><h3>Code</h3></p>

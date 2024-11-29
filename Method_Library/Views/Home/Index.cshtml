@@ -1,12 +1,17 @@
-﻿@{
+﻿@model List<Languages>
+@{
     ViewData["Title"] = "Method Library";
 }
 
 <div>
-    @*Learn about building Web apps with ASP.NET Core at: https://learn.microsoft.com/aspnet/core *@
-    <p>
-        Find and add your own methods to further enhance your coding experience.
-        Meant as a space to store methods you are proud of and want to reuse in different projects.
-    </p>
+    <span><a asp-controller="Languages" asp-action="Create">Create new Language</a></span>
+    @foreach (var language in Model) {
+        <a asp-controller="Languages" asp-action="Display" asp-route-id="@language.Id">
+            <div style="padding:15px; border: 1px #CCCCCC solid; margin: 5px 0px; box-shadow: 1px 1px #CCCCCC">
+                <h3>@language.Name</h3>    
+            </div>
+        </a>
+    }
+    
 
 </div>
