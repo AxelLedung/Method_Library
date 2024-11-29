@@ -25,6 +25,22 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @await Component.InvokeAsync("LanguageMainMenu")
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" style="float: right;" asp-controller="Languages" asp-action="Index">
+                                Manage Languages
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" style="float: right;"  asp-controller="Categories" asp-action="Index">
+                                Manage Categories
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" style="float: right;" asp-controller="Snippets" asp-action="Index">
+                                Manage Snippets
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             </div>

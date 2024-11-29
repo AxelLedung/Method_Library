@@ -13,7 +13,11 @@
     <hr />
     <div>
 @foreach (var category in Model.Categories) {
-            <p><a asp-controller="Categories" asp-action="Display" asp-route-id="@category.Id">@category.Name</a></p>
+    <a asp-controller="Categories" asp-action="Display" asp-route-id="@category.Id">
+        <div style="padding:10px; border: 1px #CCCCCC solid; margin: 5px 0px; box-shadow: 1px 1px #CCCCCC">
+            <h4>@category.Name</h4>
+        </div>
+    </a>
 }
     </div>
 </div>

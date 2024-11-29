@@ -15,7 +15,11 @@
     <div>
         @foreach (var snippets in Model.Snippets)
         {
-            <p><a asp-controller="Snippets" asp-action="Display" asp-route-id="@snippets.Id">@snippets.Name</a></p>
+            <a asp-controller="Snippets" asp-action="Display" asp-route-id="@snippets.Id">
+                <div style="padding:10px; border: 1px #CCCCCC solid; margin: 5px 0px; box-shadow: 1px 1px #CCCCCC">
+                    <h5>@snippets.Name</h5>
+                </div>
+            </a>
         }
     </div>
 </div>

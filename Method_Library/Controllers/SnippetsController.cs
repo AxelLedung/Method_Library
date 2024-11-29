@@ -23,7 +23,12 @@ namespace Method_Library.Controllers
         // GET: Snippets
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Snippets.ToListAsync());
+            var snippets = await _context.Snippets
+                .Include(c => c.Categories)
+                .Include(c => c.Categories.Languages)
+                .ToListAsync();
+
+            return View(snippets);
         }
 
         // GET: Snippets/Details/5
