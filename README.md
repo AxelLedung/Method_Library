@@ -7,11 +7,8 @@ For example to extract from JSON in a specific way or a method for creating erro
 ## Project Structure
 
 - **Backend**: ASP.NET Core API
-- **Frontend**: Blazor with SignalR for real-time feedback
-- **Code Execution**: Docker containers to run Python, Java, and .NET code in isolated environments
 - **Database**: SQL Server (for user data, code snippets, and execution logs)
 - **Authentication**: ASP.NET Identity for user management and security
-- **Deployment**: Docker Compose for local development, with options for deployment on Azure/AWS/GCP
 
 ## Features
 
@@ -20,16 +17,12 @@ For example to extract from JSON in a specific way or a method for creating erro
 
 ## Technology Stack
 
-- **.NET Core 6**: Core framework for the backend API and Blazor components.
-- **Blazor**: Interactive front-end framework for building single-page applications (SPA) in .NET.
-- **SignalR**: Real-time bi-directional communication for sending code execution output to the client.
-- **Docker**: Containerization for handling code execution in .NET, Java, and Python environments.
+- **.NET Core 9**: Core framework for the backend API components.
 - **SQL Server**: Database for user profiles, saved code snippets, and execution logs.
 
 ## Prerequisites
 
 - **.NET SDK 6** or higher
-- **Docker** (for containerized code execution)
 - **SQL Server** (or Docker container for SQL Server)
 
 ## Getting Started
