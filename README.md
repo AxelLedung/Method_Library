@@ -22,7 +22,7 @@ For example to extract from JSON in a specific way or a method for creating erro
 
 ## Prerequisites
 
-- **.NET SDK 6** or higher
+- **.NET SDK 9** or higher
 - **SQL Server** (or Docker container for SQL Server)
 
 ## Getting Started
