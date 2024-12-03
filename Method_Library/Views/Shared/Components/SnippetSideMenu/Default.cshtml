@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Method_Library.Models.Snippets>
 
+<div style="padding: .5rem 1rem;">@Model.ElementAt(0).Categories.Languages.Name/@Model.ElementAt(0).Categories.Name/Snippets</div>
+<hr />
 @foreach (var snippets in Model)
 {
     <a class="nav-link active" aria-current="page" asp-action="Display" asp-route-id="@snippets.Id">@snippets.Name</a>

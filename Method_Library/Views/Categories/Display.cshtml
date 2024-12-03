@@ -9,8 +9,11 @@
 <div>
     <span><a asp-controller="Languages" asp-action="Display" asp-route-id="@Model.LanguageId">@Model.Languages.Name</a>/</span>
     <span>@Model.Name/</span>
-    <h3>Categories</h3>
-    <a asp-controller="Snippets" asp-action="Create">Create new Snippet</a>
+    <h3>Snippets</h3>
+    <div style="position: relative;">
+        <a asp-controller="Snippets" asp-action="Create" asp-route-categoryId="@Model.Id" asp-route-languageId="@Model.Languages.Id">Create new Snippet</a>
+        <a style="position: absolute; top: 10px; right: 10px;" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    </div>
     <hr />
     <div>
         @foreach (var snippets in Model.Snippets)

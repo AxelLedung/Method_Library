@@ -29,24 +29,6 @@ namespace Method_Library.Controllers
             return View(categories);
         }
 
-        // GET: Categories/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categories = await _context.Categories
-                .Include(c => c.Languages)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (categories == null)
-            {
-                return NotFound();
-            }
-
-            return View(categories);
-        }
         public async Task<IActionResult> Display(int? id)
         {
 
@@ -72,8 +54,12 @@ namespace Method_Library.Controllers
         }
 
         // GET: Categories/Create
-        public IActionResult Create()
+        public IActionResult Create(int? languageId)
         {
+            if (languageId.HasValue)
+            {
+                ViewBag.LanguageId = languageId;
+            }
             var viewModel = new CategoryViewModel
             {
                 Languages = _context.Languages.Select(l => new SelectListItem
@@ -106,7 +92,7 @@ namespace Method_Library.Controllers
                 _context.Categories.Add(category);
                 _context.SaveChanges(); // This inserts the category and associates it with the specified LanguageId
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Display), new { id = category.Id });
             }
 
             // Repopulate the dropdown if validation fails

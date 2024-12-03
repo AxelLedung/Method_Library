@@ -17,22 +17,34 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
+            @if (ViewBag.LanguageId != null)
+            {
+                <div class="form-group">
+                    <label class="control-label">Selected Language</label>
+                    <select class="form-control" disabled>
+                        @foreach (var language in Model.Languages)
+                        {
+                            <option value="@language.Value" selected="@(language.Value == ViewBag.LanguageId.ToString())">@language.Text</option>
+                        }
+                    </select>
 
-            <div class="form-group">
-                <label asp-for="SelectedLanguageId" class="control-label"></label>
-                <select asp-for="SelectedLanguageId" asp-items="Model.Languages" class="form-control"></select>
-                <span asp-validation-for="SelectedLanguageId" class="text-danger"></span>
-            </div>
+                    <input type="hidden" asp-for="SelectedLanguageId" value="@ViewBag.LanguageId" />
+                    <span asp-validation-for="SelectedLanguageId" class="text-danger"></span>
+                </div>
+            }
+            else {
+                <div class="form-group">
+                    <label asp-for="SelectedLanguageId" class="control-label">Select Language</label>
+                    <select asp-for="SelectedLanguageId" asp-items="Model.Languages" class="form-control"></select>
+                    <span asp-validation-for="SelectedLanguageId" class="text-danger"></span>
+                </div>
+            }
 
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Method_Library.Models.Categories>
 
+<div style="padding: .5rem 1rem;">@Model.ElementAt(0).Languages.Name/Categories</div>
+<hr />
 @foreach (var categories in Model)
 {
     <a class="nav-link active" aria-current="page" asp-action="Display" asp-route-id="@categories.Id">@categories.Name</a>

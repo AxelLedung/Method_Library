@@ -25,23 +25,6 @@ namespace Method_Library.Controllers
             return View(await _context.Languages.ToListAsync());
         }
 
-        // GET: Languages/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var languages = await _context.Languages
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (languages == null)
-            {
-                return NotFound();
-            }
-
-            return View(languages);
-        }
         public async Task<IActionResult> Display(int? id)
         {
             if (id == null)
@@ -80,7 +63,7 @@ namespace Method_Library.Controllers
             {
                 _context.Add(languages);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Display), new { id = languages.Id });
             }
             return View(languages);
         }

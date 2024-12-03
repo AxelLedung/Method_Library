@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<Method_Library.Models.Languages>
 
+<div style="padding: .5rem 1rem;">Languages</div>
+<hr />
 @foreach (var language in Model)
 {
     <a class="nav-link active" aria-current="page" asp-action="Display" asp-route-id="@language.Id">@language.Name</a>

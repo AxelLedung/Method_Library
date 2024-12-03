@@ -31,23 +31,6 @@ namespace Method_Library.Controllers
             return View(snippets);
         }
 
-        // GET: Snippets/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var snippets = await _context.Snippets
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (snippets == null)
-            {
-                return NotFound();
-            }
-
-            return View(snippets);
-        }
         public async Task<IActionResult> Display(int? id)
         {
             if (id == null)
@@ -73,16 +56,25 @@ namespace Method_Library.Controllers
 
 
         // GET: Snippets/Create
-        public IActionResult Create()
+        //Create Snippet without preset
+        public IActionResult Create(int? categoryId, int? languageId)
         {
             var viewModel = new SnippetsViewModel
             {
                 Categories = _context.Categories.Select(l => new SelectListItem
                 {
                     Value = l.Id.ToString(),
-                    Text = l.Name
-                }).ToList()
+                    Text = l.Name,
+                }).ToList(),
+                Language = new Languages()
             };
+
+            if (categoryId.HasValue && languageId.HasValue)
+            {
+                ViewBag.CategoryId = categoryId;
+                ViewBag.LanguageId = languageId;
+                viewModel.Language = _context.Languages.FirstOrDefault(l => l.Id == languageId);
+            }
             return View(viewModel);
         }
 
@@ -102,11 +94,11 @@ namespace Method_Library.Controllers
                     CategoryId = viewModel.SelectedCategoryId
                 };
                 _context.Add(snippets);
-                _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Display), new { id = snippets.Id});
             }
 
-            viewModel.Categories = _context.Languages.Select(l => new SelectListItem
+            viewModel.Categories = _context.Categories.Select(l => new SelectListItem
             {
                 Value = l.Id.ToString(),
                 Text = l.Name
